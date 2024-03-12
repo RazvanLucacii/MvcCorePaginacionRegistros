@@ -1,0 +1,22 @@
+﻿@model List<Empleado>
+
+<ul class="list-group">
+    @foreach (var empleado in Model)
+    {
+        <li class="list-group-item">
+            Id Empleado: @empleado.IdEmpleado
+        </li>
+        <li class="list-group-item list-group-item-info">
+            Apellido: @empleado.Apellido
+        </li>
+        <li class="list-group-item list-group-item-info">
+            Oficio: @empleado.Oficio
+        </li>
+        <li class="list-group-item list-group-item-info">
+            Salario: @empleado.Salario
+        </li>
+        <li class="list-group-item list-group-item-info">
+            Departamento: @empleado.IdDepartamento
+        </li>
+    }
+</ul>

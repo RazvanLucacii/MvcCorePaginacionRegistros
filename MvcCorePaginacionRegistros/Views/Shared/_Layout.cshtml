@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MvcCorePaginacionRegistros.styles.css" asp-append-version="true" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -26,14 +28,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="PaginarRegistroVistaDepartamento">Paginacion</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Paginación
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="EmpleadosOficioOut">Paginacion Empleados Oficio OUT</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="EmpleadosOficio">Paginacion Empleados Oficio</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="PaginarRegistroVistaDepartamento">Paginacion</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoVistaDepartamento">Paginacion Grupo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoDepartamentos">Paginacion Grupo Departamentos</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoEmpleados">Paginacion Grupo Empleados</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoVistaDepartamento">Paginacion Grupo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoDepartamentos">Paginacion Grupo Procedure</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="Departamentos">Departamentos</a>
                         </li>
                     </ul>
                 </div>
@@ -51,8 +72,6 @@
             &copy; 2024 - MvcCorePaginacionRegistros - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
