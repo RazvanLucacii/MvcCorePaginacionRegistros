@@ -1,18 +1,11 @@
-﻿@model Empleado
-
-@{
-    Departamento departamento = ViewData["DEPASELECCIONADO"] as Departamento;
+﻿@{
+    Departamento? departamento = ViewData["DEPASELECCIONADO"] as Departamento;
 }
 
 <h1>Paginacion Empleados Departamento</h1>
 
-<p>
-    <a asp-controller="Paginacion"
-       asp-action="Departamentos" class="btn btn-dark">
-        Volver a departamentos
-    </a>
-</p>
-
+@if(departamento != null)
+{    
 <ul class="list-group">
     <li class="list-group-item list-group-item-success">
         Id Departamento: @departamento.IdDepartamento
@@ -24,54 +17,36 @@
         Localidad: @departamento.Localidad
     </li>
 </ul>
+}
 
 
 <hr />
-<ul class="list-group">
-    <li class="list-group-item list-group-item-info">
-        Id Empleado: @Model.IdEmpleado
-    </li>
-    <li class="list-group-item list-group-item-info">
-        Apellido: @Model.Apellido
-    </li>
-    <li class="list-group-item list-group-item-info">
-        Oficio: @Model.Oficio
-    </li>
-    <li class="list-group-item list-group-item-info">
-        Salario: @Model.Salario
-    </li>
-    <li class="list-group-item list-group-item-info">
-        Departamento: @Model.IdDepartamento
-    </li>
-</ul>
-<hr />
-<h2>Registro @ViewData["POSICION"] de @ViewData["REGISTROS"] registros.</h2>
-<div>
-    <ul class="list-group list-group-horizontal">
-        <li class="list-group-item">
-            <a asp-action="EmpleadosDepartamento" asp-controller="Paginacion" asp-route-posicion="1" asp-route-iddepartamento="@ViewData["DEPARTAMENTO"]">
-                Primero
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a asp-action="EmpleadosDepartamento" asp-controller="Paginacion" asp-route-posicion="@ViewData["ANTERIOR"]" asp-route-iddepartamento="@ViewData["DEPARTAMENTO"]">
-                @ViewData["ANTERIOR"]
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a asp-action="EmpleadosDepartamento" asp-controller="Paginacion" asp-route-posicion="@ViewData["POSICION"]" asp-route-iddepartamento="@ViewData["DEPARTAMENTO"]">
-                @ViewData["POSICION"]
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a asp-action="EmpleadosDepartamento" asp-controller="Paginacion" asp-route-posicion="@ViewData["SIGUIENTE"]" asp-route-iddepartamento="@ViewData["DEPARTAMENTO"]">
-                @ViewData["SIGUIENTE"]
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a asp-action="EmpleadosDepartamento" asp-controller="Paginacion" asp-route-posicion="@ViewData["ULTIMO"]" asp-route-iddepartamento="@ViewData["DEPARTAMENTO"]">
-                Ultimo
-            </a>
-        </li>
-    </ul>
+<div id="empleados-partial">
+    
 </div>
+<hr />
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            cargarEmpleados(@ViewData["POSICION"]);
+        });
+        function cargarEmpleados(posicion) {
+            var idDepartamento = @ViewData["DEPARTAMENTO"];
+
+            $.ajax({
+                url: '@Url.Action("EmpleadoDetailsPartial", "Paginacion")',
+                type: 'GET',
+                data: { posicion: posicion, iddepartamento: idDepartamento },
+                success: function (result) {
+                    $('#empleados-partial').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
+}

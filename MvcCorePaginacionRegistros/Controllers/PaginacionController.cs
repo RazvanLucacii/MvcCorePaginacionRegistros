@@ -70,8 +70,19 @@ namespace MvcCorePaginacionRegistros.Controllers
                 (posicion.Value, iddepartamento);
             Departamento departamento = await this.repo.FindDepartamentoAsync(iddepartamento);
             ViewData["DEPASELECCIONADO"] = departamento;
+            ViewData["DEPARTAMENTO"] = iddepartamento;            
+            ViewData["POSICION"] = posicion;
+            return View(model.Empleado);
+        }
+
+        public async Task<IActionResult> EmpleadoDetailsPartial(int? posicion, int iddepartamento)
+        {
+            if(posicion == null)
+            {
+                return PartialView("_EmpleadoPartial");
+            }
+            ModelEmpleadoPaginacion model = await this.repo.GetEmpleadoDepartamentoAsync(posicion.Value, iddepartamento);           
             ViewData["REGISTROS"] = model.Registros;
-            ViewData["DEPARTAMENTO"] = iddepartamento;
             int siguiente = posicion.Value + 1;
             //DEBEMOS COMPROBAR QUE NO PASAMOS DEL NUMERO DE REGISTROS
             if (siguiente > model.Registros)
@@ -88,12 +99,12 @@ namespace MvcCorePaginacionRegistros.Controllers
             ViewData["SIGUIENTE"] = siguiente;
             ViewData["ANTERIOR"] = anterior;
             ViewData["POSICION"] = posicion;
-            return View(model.Empleado);
+            return PartialView("_EmpleadoPartial", model.Empleado);
         }
 
 
 
-        public async Task<IActionResult> PaginarRegistroVistaDepartamento(int? posicion)
+            public async Task<IActionResult> PaginarRegistroVistaDepartamento(int? posicion)
         {
             if(posicion == null)
             {

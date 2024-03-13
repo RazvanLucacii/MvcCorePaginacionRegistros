@@ -1,22 +1,50 @@
-﻿@model List<Empleado>
+﻿@model Empleado
 
 <ul class="list-group">
-    @foreach (var empleado in Model)
-    {
-        <li class="list-group-item">
-            Id Empleado: @empleado.IdEmpleado
-        </li>
-        <li class="list-group-item list-group-item-info">
-            Apellido: @empleado.Apellido
-        </li>
-        <li class="list-group-item list-group-item-info">
-            Oficio: @empleado.Oficio
-        </li>
-        <li class="list-group-item list-group-item-info">
-            Salario: @empleado.Salario
-        </li>
-        <li class="list-group-item list-group-item-info">
-            Departamento: @empleado.IdDepartamento
-        </li>
-    }
+    <li class="list-group-item list-group-item-info">
+        Id Empleado: @Model.IdEmpleado
+    </li>
+    <li class="list-group-item list-group-item-info">
+        Apellido: @Model.Apellido
+    </li>
+    <li class="list-group-item list-group-item-info">
+        Oficio: @Model.Oficio
+    </li>
+    <li class="list-group-item list-group-item-info">
+        Salario: @Model.Salario
+    </li>
+    <li class="list-group-item list-group-item-info">
+        Departamento: @Model.IdDepartamento
+    </li>
 </ul>
+
+<h2>Registro @ViewData["POSICION"] de @ViewData["REGISTROS"] registros.</h2>
+<div>
+    <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">
+            <a onclick="cargarEmpleados(@ViewData["PRIMERO"])">
+                Primero
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a onclick="cargarEmpleados(@ViewData["ANTERIOR"])">
+                @ViewData["ANTERIOR"]
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a onclick="cargarEmpleados(@ViewData["POSICION"])">
+                @ViewData["POSICION"]
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a onclick="cargarEmpleados(@ViewData["SIGUIENTE"])">
+                @ViewData["SIGUIENTE"]
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a  onclick="cargarEmpleados(@ViewData["ULTIMO"])">
+                Ultimo
+            </a>
+        </li>
+    </ul>
+</div>
