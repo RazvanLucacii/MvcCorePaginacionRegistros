@@ -95,6 +95,7 @@ namespace MvcCorePaginacionRegistros.Controllers
             {
                 anterior = 1;
             }
+
             ViewData["ULTIMO"] = model.Registros;
             ViewData["SIGUIENTE"] = siguiente;
             ViewData["ANTERIOR"] = anterior;
